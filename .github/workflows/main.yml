@@ -1,0 +1,23 @@
+name: Example Workflow
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Trigger Webhook
+        run: |
+          curl -X POST http://localhost:5000/webhook \
+          -H "Content-Type: application/json" \
+          -d '{"action": "push", "author": "Your Name", "to_branch": "master", "timestamp": "'$(date -u)'" }'
+
