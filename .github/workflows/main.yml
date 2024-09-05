@@ -3,10 +3,10 @@ name: Example Workflow
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -19,5 +19,4 @@ jobs:
         run: |
           curl -X POST http://localhost:5000/webhook \
           -H "Content-Type: application/json" \
-          -d '{"action": "push", "author": "Your Name", "to_branch": "master", "timestamp": "'$(date -u)'" }'
-
+          -d '{"action": "push", "author": "Your Name", "to_branch": "main", "timestamp": "'$(date -u)'" }'
