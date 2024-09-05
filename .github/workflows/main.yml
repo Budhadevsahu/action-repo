@@ -16,8 +16,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Trigger Webhook
-        run: |
-          curl -X POST http://localhost:5000/webhook \
-          -H "Content-Type: application/json" \
-          -d "{\"action\": \"push\", \"author\": \"Your Name\", \"to_branch\": \"main\", \"timestamp\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"}"
+  run: |
+    curl -X POST https://my-flask-app.herokuapp.com/webhook \
+    -H "Content-Type: application/json" \
+    -d "{\"action\": \"push\", \"author\": \"Your Name\", \"to_branch\": \"main\", \"timestamp\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"}"
 
