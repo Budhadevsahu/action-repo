@@ -1,4 +1,4 @@
-name: Example Workflow
+name: Webhook Trigger Workflow
 
 on:
   push:
@@ -9,15 +9,19 @@ on:
       - main
 
 jobs:
-  build:
+  trigger-webhook:
     runs-on: ubuntu-latest
+
     steps:
+      # Step 1: Check out the code from the repository
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # Step 2: Trigger the webhook with a POST request
       - name: Trigger Webhook
-  run: |
-    curl -X POST https://my-flask-app.herokuapp.com/webhook \
-    -H "Content-Type: application/json" \
-    -d "{\"action\": \"push\", \"author\": \"Your Name\", \"to_branch\": \"main\", \"timestamp\": \"$(date -u +"%Y-%m-%dT%H:%M:%SZ")\"}"
+        run: |
+          curl -X POST https://your-public-url.com/webhook \
+          -H "Content-Type: application/json" \
+          -d "{\"action\": \"push\", \"author\": \"Your Name\", \"to_branch\": \"main\", \"timestamp\": \"$(date -u +\"%Y-%m-%dT%H:%M:%SZ\")\"}"
+
 
